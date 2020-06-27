@@ -9,14 +9,40 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
 }
 
+#chat-title {
+  font-family: 'Notable', sans-serif;
+  font-size: 50px;
+}
+
 .general {
   display: grid;
   width: 80%;
   margin: 0 auto;
-  grid-template-columns: 200px, auto-fill, 1fr;
-  grid-template-rows: 1fr, 1fr, 1fr;
 }
 
+.general-login {
+  text-align: center;
+  width: 80%;
+  height: 500px;
+  margin:  auto;
+  display: grid;
+  place-items: center;
+}
+
+.login-container {
+  align-self: center;
+  width: 550px;
+}
+
+.login-container input[type=submit] {
+  margin-top: 10px;
+  width: 550px;
+}
+
+.login-container input[type=text] {
+  margin-top: 30px;
+  width: 550px;
+}
 .status {
   grid-column-start: 1;
   grid-row-start: 2;

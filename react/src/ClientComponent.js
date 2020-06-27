@@ -63,11 +63,12 @@ export default function ClientComponent() {
     return (
         <>
             {
-                login ? (<div className="general" >
-                    <form>
-                        <input name="username" onChange={(e) => setUser(e.target.value)}></input>
-                    </form>
-                    <input type="submit" onClick={sendUser} value="Entrar"></input>
+                login ? (<div className="general-login" >
+                    <div className="login-container">
+                    <h1 id="chat-title">Chatroom</h1>
+                        <input type="text" name="username" placeholder="Digite seu nome de usuário" onChange={(e) => setUser(e.target.value)}></input>
+                        <input type="submit" onClick={sendUser} value="Entrar"></input>
+                    </div>
                 </div>) : (
                         <div className="general">
                             <div className="status">
