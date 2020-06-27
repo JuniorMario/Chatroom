@@ -12,13 +12,15 @@ export default function ClientComponent() {
     const [user, setUser] = useState("");
     const [online, setOnline] = useState("");
     const [datas, setData] = useState("");
-
+    const users = [];
     useEffect(() => {
         let user = ''
         global.socket = socketIOClient(ENDPOINT);
         global.socket.on('welcome', data => {
-            const it = data.map((item) => (<p><b>{item.user}</b>: {item.msg}</p>))
-            setResponse(it);
+            const previousmsgs = data.msgs.map((item) => (<p><b>{item.user}</b>: {item.msg}</p>))
+            const previousonline = data.online.map((item) => (<li><b>{item.user}</b></li>))
+            setResponse(previousmsgs);
+            setOnline(previousonline)
         });
 
         global.socket.on('mensagens', data => {
@@ -27,6 +29,7 @@ export default function ClientComponent() {
         });
 
         global.socket.on('online', data => {
+            
             const it = data.map((item) => (<li><b>{item.user}</b></li>))
             setOnline(it);
         });
@@ -50,12 +53,12 @@ export default function ClientComponent() {
     }
 
     const sendUser = () => {
-        setUser(user)
         global.socket.emit('online', user);
         setLogin(false)
     }
 
     const logout = () => {
+        global.socket.emit('remove', user)
         global.socket.emit('disconnect')
         setLogin(true)
     }
