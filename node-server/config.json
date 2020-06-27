@@ -1,0 +1,16 @@
+{
+    "baseUrl": "http://127.0.0.1",
+    "cookie": {
+        "domain": "127.0.0.1",
+        "httpOnly": false,
+        "secure": false
+    },
+    "mailer": {
+        "user": "xxx",
+        "pass": "xxx",
+        "host": "xxx",
+        "from": "xxx <xxxxxxxxx>",
+        "secure": false,
+        "port": 587
+    }
+}

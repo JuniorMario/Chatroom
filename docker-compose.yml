@@ -1,0 +1,53 @@
+version: "3.6"
+
+services:
+  app:
+    tty: true
+    restart: always
+    networks:
+      - app
+    container_name: app
+    build:
+      context: ./node-server
+      dockerfile: ./Dockerfile
+    ports:
+      - "9229:9229"
+      - "4001:4001"
+    volumes:
+      - ./node-server:/app/node-server
+      - /app/node_modules
+    depends_on:
+      - database
+  frontend:
+    tty: true
+    container_name: frontend
+    environment:
+      - WEBSOCKETIP=app
+    networks:
+      - app
+    restart: always
+    build:
+      context: ./react
+      dockerfile: ./Dockerfile
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./react:/app/react
+      - /app/node_modules
+  database:
+    tty: true
+    restart: always
+    container_name: database
+    image: mysql:5.7
+    user: "1000:1000"
+    volumes:
+      - ./docker/database:/var/lib/mysql
+    environment:
+      - MYSQL_USERNAME=root
+      - MYSQL_PASSWORD=root
+      - MYSQL_ROOT_PASSWORD=
+      - MYSQL_DATABASE=chatroom
+      - MYSQL_ALLOW_EMPTY_PASSWORD=true
+      - MYSQL_CHARSET=utf8mb4
+networks: 
+  app:

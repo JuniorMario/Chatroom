@@ -12,15 +12,20 @@ const online = [];
 
 io.on("connection", (socket) => {
   console.log(`Connected from ${socket.id}`);
-  online.push({user: 'User', ID: socket.id})
-  socket.join('some room')
 
+  socket.join('some room')
   io.in('some room').emit('welcome', msgs);
   io.in('some room').emit('online', online);
+
+
+  socket.on('online', (data) => {
+    online.push({ user: data})
+  });
 
   socket.on("disconnect", () => {
     console.log("Client disconnected");
   });
+
 
   socket.on('msg', (data) => {
     msgs.push(data);

@@ -1,35 +1,38 @@
 import React, { useEffect, useState } from "react";
 import socketIOClient from "socket.io-client";
 import './index.css'
-const ENDPOINT = "http://127.0.0.1:4001/";
+const ENDPOINT = "http://localhost:4001/";
 
 
 export default function ClientComponent() {
     const [response, setResponse] = useState("");
-
     const [msg, setMsg] = useState("");
     const [user, setUser] = useState("");
     const [online, setOnline] = useState("");
 
     useEffect(() => {
+        let user = ''
         global.socket = socketIOClient(ENDPOINT);
-        global.socket.on("FromAPI", data => {
-            setResponse(data);
-        });
         global.socket.on('welcome', data => {
             const it = data.map((item) => (<p><b>{item.user}</b>: {item.msg}</p>))
             setResponse(it);
         });
 
         global.socket.on('mensagens', data => {
-        const it = data.map((item) => (<p><b>{item.user}</b>: {item.msg}</p>))
+            const it = data.map((item) => (<p><b>{item.user}</b>: {item.msg}</p>))
             setResponse(it);
         });
 
         global.socket.on('online', data => {
-            const it = data.map((item) => (<li><b>{item.user}</b>: {item.ID}</li>))
-                setOnline(it);
-            });
+            const it = data.map((item) => (<li><b>{item.user}</b></li>))
+            setOnline(it);
+        });
+
+
+        global.socket.on('user', data => {
+            console.log('receveid', data)
+            user = data
+        });
 
 
     }, []);
@@ -50,16 +53,17 @@ export default function ClientComponent() {
                     {online}
                 </ul>
             </div>
+            <button className="logout">Logout</button>
             <div className="user" >
                 <input type="text" name="user" onChange={(e) => setUser(e.target.value)}></input>
             </div>
             <div className="content">
-               {response}
+                {response}
             </div>
-            
+
             <div className="sender">
                 <div className="formulario">
-                        <input onChange={(e) => setMsg(e.target.value)} type="text" name="message" value={msg} ></input>
+                    <input onChange={(e) => setMsg(e.target.value)} type="text" name="message" value={msg} ></input>
                     <button onClick={sendText}>Send</button>
 
                 </div>

@@ -15,7 +15,6 @@ code {
   margin: 0 auto;
   grid-template-columns: 200px, auto-fill, 1fr;
   grid-template-rows: 1fr, 1fr, 1fr;
- 
 }
 
 .status {
@@ -24,6 +23,13 @@ code {
   height: 400px;
   width: 300px;
   border: 1px solid;
+  margin-left: 70px;
+}
+
+.logout {
+  grid-column-start: 1;
+  grid-row-start: 3;
+  width: 300px;
   margin-left: 70px;
 }
 
@@ -48,7 +54,6 @@ code {
 .formulario {
   grid-column-start: 2;
   padding-top: 5px;
-
 }
 
 input {
