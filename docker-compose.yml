@@ -16,8 +16,6 @@ services:
     volumes:
       - ./node-server:/app/node-server
       - /app/node_modules
-    depends_on:
-      - redis
   frontend:
     tty: true
     container_name: frontend
