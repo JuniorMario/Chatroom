@@ -55,6 +55,11 @@ export default function ClientComponent() {
         setLogin(false)
     }
 
+    const logout = () => {
+        global.socket.emit('disconnect')
+        setLogin(true)
+    }
+
     return (
         <>
             {
@@ -70,7 +75,7 @@ export default function ClientComponent() {
                                     {online}
                                 </ul>
                             </div>
-                            <button className="logout">Logout</button>
+                            <button onClick={logout} className="logout">Logout</button>
                             <div className="user" >
                                 <input type="text" name="user" value={user} onChange={(e) => setUser(e.target.value)}></input>
                             </div>
