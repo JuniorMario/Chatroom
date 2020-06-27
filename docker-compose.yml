@@ -17,7 +17,7 @@ services:
       - ./node-server:/app/node-server
       - /app/node_modules
     depends_on:
-      - database
+      - redis
   frontend:
     tty: true
     container_name: frontend
@@ -34,20 +34,6 @@ services:
     volumes:
       - ./react:/app/react
       - /app/node_modules
-  database:
-    tty: true
-    restart: always
-    container_name: database
-    image: mysql:5.7
-    user: "1000:1000"
-    volumes:
-      - ./docker/database:/var/lib/mysql
-    environment:
-      - MYSQL_USERNAME=root
-      - MYSQL_PASSWORD=root
-      - MYSQL_ROOT_PASSWORD=
-      - MYSQL_DATABASE=chatroom
-      - MYSQL_ALLOW_EMPTY_PASSWORD=true
-      - MYSQL_CHARSET=utf8mb4
-networks: 
+
+networks:
   app:

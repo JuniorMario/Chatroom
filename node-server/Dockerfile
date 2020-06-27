@@ -10,5 +10,5 @@ RUN yarn install
 
 COPY  package.json yarn.lock  ecosystem.config.js config.json  ./
 
-EXPOSE 4001 9229
+EXPOSE 4001 9229 6379
 CMD pm2 start --no-daemon ecosystem.config.js

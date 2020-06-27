@@ -1,14 +1,17 @@
 import React, { useEffect, useState } from "react";
 import socketIOClient from "socket.io-client";
+
 import './index.css'
 const ENDPOINT = "http://localhost:4001/";
 
 
 export default function ClientComponent() {
     const [response, setResponse] = useState("");
+    const [login, setLogin] = useState(true);
     const [msg, setMsg] = useState("");
     const [user, setUser] = useState("");
     const [online, setOnline] = useState("");
+    const [datas, setData] = useState("");
 
     useEffect(() => {
         let user = ''
@@ -46,28 +49,49 @@ export default function ClientComponent() {
         setMsg('')
     }
 
+    const sendUser = () => {
+        setUser(user)
+        global.socket.emit('online', user);
+        setLogin(false)
+    }
+
     return (
-        <div className="general">
-            <div className="status">
-                <ul>
-                    {online}
-                </ul>
-            </div>
-            <button className="logout">Logout</button>
-            <div className="user" >
-                <input type="text" name="user" onChange={(e) => setUser(e.target.value)}></input>
-            </div>
-            <div className="content">
-                {response}
-            </div>
+        <>
+            {
+                login ? (<div className="general" >
+                    <form>
+                        <input name="username" onChange={(e) => setUser(e.target.value)}></input>
+                    </form>
+                    <input type="submit" onClick={sendUser} value="Entrar"></input>
+                </div>) : (
+                        <div className="general">
+                            <div className="status">
+                                <ul>
+                                    {online}
+                                </ul>
+                            </div>
+                            <button className="logout">Logout</button>
+                            <div className="user" >
+                                <input type="text" name="user" value={user} onChange={(e) => setUser(e.target.value)}></input>
+                            </div>
+                            <div className="content">
+                                {response}
+                            </div>
 
-            <div className="sender">
-                <div className="formulario">
-                    <input onChange={(e) => setMsg(e.target.value)} type="text" name="message" value={msg} ></input>
-                    <button onClick={sendText}>Send</button>
+                            <div className="sender">
+                                <div className="formulario">
+                                    <input onChange={(e) => setMsg(e.target.value)} type="text" name="message" value={msg} ></input>
+                                    <button onClick={sendText}>Send</button>
+                                </div>
+                            </div>
+                        </div>
+                    )
+            }
 
-                </div>
-            </div>
-        </div>
-    );
+
+        </>
+    )
 }
+
+
+
