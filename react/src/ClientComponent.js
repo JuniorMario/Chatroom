@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from "react";
 import socketIOClient from "socket.io-client";
-
 import './index.css'
-const ENDPOINT = "http://localhost:4001/";
 
+const ENDPOINT = "http://localhost:4001/";
 
 export default function ClientComponent() {
     const [response, setResponse] = useState("");
@@ -34,13 +33,10 @@ export default function ClientComponent() {
             setOnline(it);
         });
 
-
         global.socket.on('user', data => {
             console.log('receveid', data)
             user = data
         });
-
-
     }, []);
 
     const sendText = () => {
@@ -68,7 +64,7 @@ export default function ClientComponent() {
             {
                 login ? (<div className="general-login" >
                     <div className="login-container">
-                    <h1 id="chat-title">Chatroom</h1>
+                    <h1 id="chat-title">Chatroom</h1> <h3>V0.1</h3>
                         <input type="text" name="username" placeholder="Digite seu nome de usuário" onChange={(e) => setUser(e.target.value)}></input>
                         <input type="submit" onClick={sendUser} value="Entrar"></input>
                     </div>
@@ -96,8 +92,6 @@ export default function ClientComponent() {
                         </div>
                     )
             }
-
-
         </>
     )
 }

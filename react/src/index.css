@@ -9,6 +9,10 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
 }
 
+h3 {
+  font-family: 'Krona One', sans-serif;
+}
+
 #chat-title {
   font-family: 'Notable', sans-serif;
   font-size: 50px;
@@ -24,7 +28,7 @@ code {
   text-align: center;
   width: 80%;
   height: 500px;
-  margin:  auto;
+  margin: auto;
   display: grid;
   place-items: center;
 }
@@ -43,6 +47,7 @@ code {
   margin-top: 30px;
   width: 550px;
 }
+
 .status {
   grid-column-start: 1;
   grid-row-start: 2;
