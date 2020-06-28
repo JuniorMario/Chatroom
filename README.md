@@ -14,12 +14,13 @@ A Chatroom built with Node.js and React.js
 Build the application with docker-compose
 
     docker-compose up --build -d
-   Open your browser on localhost, port 3000/chat(or click [here](http://localhost:3000/chat).
+   Open your browser on localhost, port 3000/chat(or click [here](http://localhost:3000/chat)).
 **Enjoy it!**
 
 ## Dependencies
 ### When running docker:
  - Docker
+ - Docker Compose
  
  ### When running local:
  
