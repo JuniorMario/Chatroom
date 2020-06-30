@@ -65,6 +65,7 @@ h3 {
 }
 
 .content {
+  overflow: scroll;
   grid-column-start: 2;
   width: 600px;
   height: 400px;

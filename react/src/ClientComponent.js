@@ -12,6 +12,7 @@ export default function ClientComponent() {
     const [online, setOnline] = useState("");
     const [datas, setData] = useState("");
     const users = [];
+
     useEffect(() => {
         let user = ''
         global.socket = socketIOClient(ENDPOINT);
